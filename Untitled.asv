@@ -1,0 +1,19 @@
+[y,Fs]=wavread('sample_audio_voice.wav'); %读出信号，采样率和采样位数。
+
+sound(y,Fs);
+
+t=(0:length(y)-1)/Fs; %计算时间轴
+
+plot(t,y);xlabel('Time(s)');%在第一个窗口画波形
+
+n=0:length(y)-1;
+
+Y= fft(y,length(y)); %在sigLength这个有限区间内做快速傅立叶变换 
+
+mag=abs(Y);
+
+f=Fs*n/sigLength;
+
+subplot(3,1,2);plot(f,abs(Y));
+
+xlabel('Frequency(Hz)')

@@ -1,0 +1,70 @@
+读取音频并显示
+[y,Fs]=wavread('sample_audio_instrumental .wav'); %Instrumental -time
+sound(y,Fs);
+t=(0:length(y)-1)/Fs; 
+plot(t,y);xlabel('Time(s)');
+
+[y,Fs]=wavread('sample_audio_voice.wav'); %Speech -time
+sound(y,Fs);
+t=(0:length(y)-1)/Fs; 
+plot(t,y);xlabel('Time(s)');
+
+
+[y,Fs]=wavread('sample_audio_instrumental .wav'); %Instrumental -frequency
+sound(y,Fs);
+t=(0:length(y)-1)/Fs; 
+plot(t,y);xlabel('Time(s)');
+n=0:length(y)-1;
+Y= fft(y,length(y));  
+f=fs*n/length(y);
+plot(f,abs(Y));
+xlabel('Frequency(Hz)')
+
+[y,Fs]=wavread('sample_audio_voice.wav .wav'); %Speech -frequency
+sound(y,Fs);
+t=(0:length(y)-1)/Fs; 
+plot(t,y);xlabel('Time(s)');
+n=0:length(y)-1;
+Y= fft(y,length(y));  
+f=fs*n/length(y);
+plot(f,abs(Y));
+xlabel('Frequency(Hz)')
+
+将音频信号幅度放大并存取
+[y,Fs]=wavread('sample_audio_instrumental .wav'); %3*
+y=3*y;
+sound(y,Fs);
+
+t=(0:length(y)-1)/Fs; 
+
+plot(t,y);xlabel('Time(s)');
+wavwrite(y,fs,'Instrumental-3.wav');
+
+将音频信号幅度减小并存取
+[y,Fs]=wavread('sample_audio_instrumental .wav'); %0.1*
+y=0.1*y;
+sound(y,Fs);
+
+t=(0:length(y)-1)/Fs; 
+
+plot(t,y);xlabel('Time(s)');
+wavwrite(y,fs,'Instrumental-0.1.wav');
+
+混合
+[y1,Fs1]=wavread('Drums.wav');    %mix(0.2,0.2,0.4,0.2)
+[y2,Fs2]=wavread('Guitar.wav');
+[y3,Fs3]=wavread('Synths.wav');
+[y4,Fs4]=wavread('LeadVocals.wav');
+y=0.2*y1+0.2*y2+0.4*y3+0.2*y4;
+t=(0:length(y)-1)/Fs1; 
+plot(t,y);xlabel('Time(s)');
+sound(y,Fs2);
+
+[y1,Fs1]=wavread('Drums.wav');    %mix(0.25,0.25,0.25,0.25)
+[y2,Fs2]=wavread('Guitar.wav');
+[y3,Fs3]=wavread('Synths.wav');
+[y4,Fs4]=wavread('LeadVocals.wav');
+y=0.25*y1+0.25*y2+0.25*y3+0.25*y4;
+t=(0:length(y)-1)/Fs1; 
+plot(t,y);xlabel('Time(s)');
+sound(y,Fs2);
